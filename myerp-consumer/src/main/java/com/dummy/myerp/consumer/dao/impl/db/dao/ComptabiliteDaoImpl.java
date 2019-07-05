@@ -75,6 +75,63 @@ public class ComptabiliteDaoImpl extends AbstractDbConsumer implements Comptabil
         return vList;
     }
 
+    /** getValSequenceJournalByCodeJournalAndAnnee */
+    private static String SQLGetValSequenceJournalByCodeJournalAndAnnee;
+    public void setSQLGetValSequenceJournalByCodeJournalAndAnnee(String pSQLGetValSequenceJournalByCodeJournalAndAnnee) {
+        SQLGetValSequenceJournalByCodeJournalAndAnnee = pSQLGetValSequenceJournalByCodeJournalAndAnnee;
+    }
+    @Override
+    public int getValSequenceJournalByCodeJournalComptableAndAnnee(String codeJournalComptable, int anneeEcritureComptable) throws NotFoundException {
+        NamedParameterJdbcTemplate vJdbcTemplate = new NamedParameterJdbcTemplate(this.getDataSource(DataSourcesEnum.MYERP));
+        MapSqlParameterSource vSqlParams = new MapSqlParameterSource();
+        vSqlParams.addValue("journal_code", codeJournalComptable);
+        vSqlParams.addValue("annee", anneeEcritureComptable);
+        int valSequenceJournal;
+        try {
+            valSequenceJournal = vJdbcTemplate.queryForObject(SQLGetValSequenceJournalByCodeJournalAndAnnee, vSqlParams, Integer.class);
+        } catch (EmptyResultDataAccessException vEx) {
+            throw new NotFoundException("Séquence non trouvée pour le code journal " + codeJournalComptable + " et pour l'année " + anneeEcritureComptable);
+        }
+        return valSequenceJournal;
+    }
+
+    /** insertValSequenceJournalComptable */
+    private static String SQLInsertValSequenceJournalComptable;
+    public void setSQLInsertValSequenceJournalComptable(String pSQLInsertValSequenceJournalComptable) {
+        SQLInsertValSequenceJournalComptable = pSQLInsertValSequenceJournalComptable;
+    }
+    @Override
+    public void insertValSequenceJournalComptable(String codeJournalComptable, int anneeEcritureComptable, int valSequenceJournal) {
+        NamedParameterJdbcTemplate vJdbcTemplate = new NamedParameterJdbcTemplate(this.getDataSource(DataSourcesEnum.MYERP));
+        MapSqlParameterSource vSqlParams = new MapSqlParameterSource();
+        vSqlParams.addValue("journal_code", codeJournalComptable);
+        vSqlParams.addValue("annee", anneeEcritureComptable);
+        vSqlParams.addValue("derniere_valeur", valSequenceJournal);
+
+        vJdbcTemplate.update(SQLInsertValSequenceJournalComptable, vSqlParams);
+    }
+
+    /** updateValSequenceJournalComptable */
+    private static String SQLUpdateValSequenceJournalComptable;
+    public void setSQLUpdateValSequenceJournalComptable(String pSQLUpdateValSequenceJournalComptable) {
+        SQLUpdateValSequenceJournalComptable = pSQLUpdateValSequenceJournalComptable;
+    }
+    @Override
+    public void updateValSequenceJournalComptable(String codeJournalComptable, int anneeEcritureComptable,
+                                                  int valSequenceJournal) throws NotFoundException {
+        NamedParameterJdbcTemplate vJdbcTemplate = new NamedParameterJdbcTemplate(this.getDataSource(DataSourcesEnum.MYERP));
+        MapSqlParameterSource vSqlParams = new MapSqlParameterSource();
+        vSqlParams.addValue("journal_code", codeJournalComptable);
+        vSqlParams.addValue("annee", anneeEcritureComptable);
+        vSqlParams.addValue("derniere_valeur", valSequenceJournal);
+        try {
+            vJdbcTemplate.update(SQLUpdateValSequenceJournalComptable, vSqlParams);
+        } catch (EmptyResultDataAccessException vEx) {
+            throw new NotFoundException("Séquence non trouvée pour le code journal " + codeJournalComptable + " et pour l'année " + anneeEcritureComptable);
+        }
+
+    }
+
     // ==================== EcritureComptable - GET ====================
 
     /** SQLgetListEcritureComptable */
@@ -87,6 +144,30 @@ public class ComptabiliteDaoImpl extends AbstractDbConsumer implements Comptabil
         JdbcTemplate vJdbcTemplate = new JdbcTemplate(this.getDataSource(DataSourcesEnum.MYERP));
         EcritureComptableRM vRM = new EcritureComptableRM();
         List<EcritureComptable> vList = vJdbcTemplate.query(SQLgetListEcritureComptable, vRM);
+        return vList;
+    }
+
+    /** SQLgetListEcritureComptableByDate */
+    private static String SQLgetListEcritureComptableByDate;
+    public void setSQLgetListEcritureComptableByDate(String pSQLgetListEcritureComptableByDate) {
+        SQLgetListEcritureComptableByDate = pSQLgetListEcritureComptableByDate;
+    }
+    @Override
+    public List<EcritureComptable> getListEcritureComptableByDate(String dateDebut, String dateFin) throws NotFoundException {
+        NamedParameterJdbcTemplate vJdbcTemplate = new NamedParameterJdbcTemplate(this.getDataSource(DataSourcesEnum.MYERP));
+        MapSqlParameterSource vSqlParams = new MapSqlParameterSource();
+        vSqlParams.addValue("dateDebut", dateDebut);
+        vSqlParams.addValue("dateFin", dateFin);
+        EcritureComptableRM vRM = new EcritureComptableRM();
+        List<EcritureComptable> vList;
+        try {
+            vList = vJdbcTemplate.query(SQLgetListEcritureComptableByDate, vSqlParams, vRM);
+        } catch (EmptyResultDataAccessException vEx) {
+            throw new NotFoundException("L'écriture comptable entre les dates " + dateDebut + " et " + dateFin + " n'a pas été trouvée");
+        }
+        if(vList.size() == 0) {
+            throw new NotFoundException("L'écriture comptable entre les dates " + dateDebut + " et " + dateFin + " n'a pas été trouvée");
+        }
         return vList;
     }
 
@@ -171,7 +252,7 @@ public class ComptabiliteDaoImpl extends AbstractDbConsumer implements Comptabil
 
         // ----- Récupération de l'id
         Integer vId = this.queryGetSequenceValuePostgreSQL(DataSourcesEnum.MYERP, "myerp.ecriture_comptable_id_seq",
-                                                           Integer.class);
+                Integer.class);
         pEcritureComptable.setId(vId);
 
         // ===== Liste des lignes d'écriture
