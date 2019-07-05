@@ -19,12 +19,26 @@ public interface ComptabiliteDao {
      */
     List<CompteComptable> getListCompteComptable();
 
-
     /**
      * Renvoie la liste des Journaux Comptables
      * @return {@link List}
      */
     List<JournalComptable> getListJournalComptable();
+
+    /**
+     * Renvoie la dernière valeur de la séquence du journal comptable pour une annnée donnée
+     */
+    int getValSequenceJournalByCodeJournalComptableAndAnnee(String codeJournalComptable, int anneeEcritureComptable) throws NotFoundException;
+
+    /**
+     * Insert la dernière valeur de la séquence du journal comptable pour une annnée donnée
+     */
+    void insertValSequenceJournalComptable(String codeJournalComptable, int anneeEcritureComptable, int valSequenceJournal);
+
+    /**
+     * Met à jour la dernière valeur de la séquence du journal comptable pour une annnée donnée
+     */
+    void updateValSequenceJournalComptable(String codeJournalComptable, int anneeEcritureComptable, int valSequenceJournal) throws NotFoundException;
 
 
     // ==================== EcritureComptable ====================
@@ -34,6 +48,12 @@ public interface ComptabiliteDao {
      * @return {@link List}
      */
     List<EcritureComptable> getListEcritureComptable();
+
+    /**
+     * Renvoie la liste des Écritures Comptables sur une periode donnée
+     * @return {@link List}
+     */
+    List<EcritureComptable> getListEcritureComptableByDate(String dateDebut, String dateFin) throws NotFoundException;
 
     /**
      * Renvoie l'Écriture Comptable d'id {@code pId}.
