@@ -1,4 +1,6 @@
-package com.dummy.myerp.business.test-business;
+package com.dummy.myerp.business.test
+
+-business;
 
 
 import com.dummy.myerp.business.contrat.BusinessProxy;
@@ -14,13 +16,18 @@ public abstract class BusinessTestCase {
         SpringRegistry.init();
     }
 
-    /** {@link BusinessProxy} */
+    /**
+     * {@link BusinessProxy}
+     */
     private static final BusinessProxy BUSINESS_PROXY = SpringRegistry.getBusinessProxy();
-    /** {@link TransactionManager} */
+    /**
+     * {@link TransactionManager}
+     */
     private static final TransactionManager TRANSACTION_MANAGER = SpringRegistry.getTransactionManager();
 
 
     // ==================== Constructeurs ====================
+
     /**
      * Constructeur.
      */
@@ -34,6 +41,6 @@ public abstract class BusinessTestCase {
     }
 
     public static TransactionManager getTransactionManager() {
-        return TRANSACTION_MANAGER  ;
+        return TRANSACTION_MANAGER;
     }
 }
