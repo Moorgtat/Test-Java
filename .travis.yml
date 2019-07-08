@@ -9,6 +9,6 @@ before_install:
 before_script:
   - docker-compose up --build -d
 script:
-  - mvn clean install -P test-ITBusiness
+  - mvn test -Ptest-ITBusiness -B
 after_script:
   - docker-compose down
