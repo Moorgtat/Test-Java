@@ -129,6 +129,9 @@
                     <testResource>
                         <directory>src/test/resources</directory>
                     </testResource>
+                    <testResource>
+                        <directory>src/test-IT/resources</directory>
+                    </testResource>
                 </testResources>
             </build>
         </profile>
