@@ -6,6 +6,7 @@ jdk:
 before_install:
   - docker -v
   - docker-compose -v
+  - cd ../..
 before_script:
   - docker-compose up --build -d
 script:
