@@ -52,7 +52,7 @@
 
         <!-- ===== Version properties ===== -->
         <log4j.version>2.8.1</log4j.version>
-        <spring.version>4.3.7.RELEASE</spring.version>
+        <spring.version>4.3.18.RELEASE</spring.version>
     </properties>
 
 
@@ -86,12 +86,7 @@
 
         <!-- Profile utilisé pour lancer les tests d'intégration de la couche Business -->
         <profile>
-            <id>test-business</id>
-        </profile>
-
-        <!-- Profile utilisé pour lancer les tests d'intégration de la couche Consumer -->
-        <profile>
-            <id>test-consumer</id>
+            <id>test-ITBusiness</id>
         </profile>
     </profiles>
 
