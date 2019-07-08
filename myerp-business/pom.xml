@@ -53,6 +53,10 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>myerp-consumer</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>myerp-technical</artifactId>
+        </dependency>
 
         <!-- ===== Spring JDBC/Tx ===== -->
         <!-- spring-tx : transaction, JCA, DAO -->
@@ -98,7 +102,7 @@
     <profiles>
         <!-- Profile utilisé pour lancer les tests d'intégration de la couche Business -->
         <profile>
-            <id>test-business</id>
+            <id>test-ITBusiness</id>
             <build>
                 <plugins>
                     <!-- Ajout du répertoire src/test-business/java en tant que source de test du module -->
@@ -114,7 +118,7 @@
                                 </goals>
                                 <configuration>
                                     <sources>
-                                        <source>src/test-business/java</source>
+                                        <source>src/test-IT/java</source>
                                     </sources>
                                 </configuration>
                             </execution>
@@ -124,9 +128,6 @@
                 <testResources>
                     <testResource>
                         <directory>src/test/resources</directory>
-                    </testResource>
-                    <testResource>
-                        <directory>src/test-business/resources</directory>
                     </testResource>
                 </testResources>
             </build>
