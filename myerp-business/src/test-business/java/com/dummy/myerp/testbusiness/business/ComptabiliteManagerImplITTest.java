@@ -19,7 +19,7 @@ import com.dummy.myerp.model.bean.comptabilite.LigneEcritureComptable;
 import com.dummy.myerp.model.bean.comptabilite.SoldeCompteComptable;
 import com.dummy.myerp.technical.exception.FunctionalException;
 import com.dummy.myerp.technical.exception.NotFoundException;
-import com.dummy.myerp.technical.exception.TechnicalException;;
+import com.dummy.myerp.technical.exception.TechnicalException;
 
 
 public class ComptabiliteManagerImplITTest extends BusinessTestCase {
