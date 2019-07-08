@@ -118,7 +118,7 @@
                                 </goals>
                                 <configuration>
                                     <sources>
-                                        <source>src/test-IT/java</source>
+                                        <source>src\test-IT\java\com\dummy\myerp\business\testIT</source>
                                     </sources>
                                 </configuration>
                             </execution>
