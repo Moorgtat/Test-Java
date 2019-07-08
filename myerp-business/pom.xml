@@ -118,7 +118,7 @@
                                 </goals>
                                 <configuration>
                                     <sources>
-                                        <source>src\test-IT\java\com\dummy\myerp\business\testIT</source>
+                                        <source>src\test-IT\java\com\dummy\myerp\business\testIT\ComptabiliteManagerImplITTest.java</source>
                                     </sources>
                                 </configuration>
                             </execution>
