@@ -34,6 +34,6 @@ public abstract class BusinessTestCase {
     }
 
     public static TransactionManager getTransactionManager() {
-        return TRANSACTION_MANAGER;
+        return TRANSACTION_MANAGER  ;
     }
 }
