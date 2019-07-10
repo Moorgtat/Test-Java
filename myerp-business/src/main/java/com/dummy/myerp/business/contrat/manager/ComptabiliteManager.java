@@ -36,19 +36,19 @@ public interface ComptabiliteManager {
      * @return {@link List}
      */
     List<EcritureComptable> getListEcritureComptable();
-
+    
     /**
      * Renvoie la liste des écritures comptables sur une periode donnée.
      *
      * @return {@link List}
      */
     List<EcritureComptable> getListEcritureComptableByDate(String dateDebut, String dateFin) throws NotFoundException;
-
+    
     /**
      * Renvoie la dernière valeur de la séquence du journal comptable pour une annnée donnée
      */
     int getValSequenceJournalComptable(String codeJournalComptable, int anneeEcritureComptable) throws NotFoundException;
-
+ 
     /**
      * Calcul et renvoie le solde d'un compte comptable
      *
@@ -64,7 +64,7 @@ public interface ComptabiliteManager {
      * @param dateFin
      */
     SoldeCompteComptable getSoldeCompteComptable(int numCompteComptable, String dateDebut, String dateFin) throws TechnicalException, NotFoundException;
-
+    
     /**
      * Ajoute une référence à l'écriture comptable.
      *
@@ -104,8 +104,8 @@ public interface ComptabiliteManager {
      * @throws FunctionalException Si l'Ecriture comptable ne respecte pas les règles de gestion
      */
     void updateEcritureComptable(EcritureComptable pEcritureComptable) throws FunctionalException;
-
-
+    
+    
     /**
      * Met à jour ou insert la dernière valeur de la séquence du journal comptable pour une annnée donnée
      *
