@@ -336,7 +336,7 @@ public class ComptabiliteManagerImplITTest extends BusinessTestCase {
         // update
         manager.updateEcritureComptable(vEcritureComptable2);// Test de l'écriture en base
         //
-        // pull et check (pas poulet tchècque)
+        // pull et check
         lEcritures = manager.getListEcritureComptable();
         for (EcritureComptable ecr:lEcritures) {
             if(ecr.getReference().equals(vEcritureComptable.getReference()) && ecr.getDate().getDate() == vEcritureComptable2.getDate().getDate() && ecr.getDate().getMonth() == vEcritureComptable2.getDate().getMonth() && ecr.getDate().getYear() == vEcritureComptable2.getDate().getYear()){
