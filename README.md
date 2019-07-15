@@ -37,3 +37,7 @@ Il comporte :
     docker-compose stop
     docker-compose rm -v
     docker-compose up
+
+### Soutenance
+
+Soutenance avec M. Sanogo.
